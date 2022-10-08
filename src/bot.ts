@@ -1,7 +1,8 @@
 import { Client, GatewayIntentBits } from "discord.js";
-import { BOT_TOKEN } from "./config";
+import { BOT_TOKEN, MONGO_URI } from "./config";
 import { deployCommands } from "./deployCommands";
 import { HandleInteractions } from "./commands";
+import { connectionToMongoDB } from "./utils/connectionToMongo";
 
 const client = new Client({ intents: [
     GatewayIntentBits.Guilds,
@@ -11,11 +12,11 @@ const client = new Client({ intents: [
     GatewayIntentBits.GuildMessages
 ] });
 
-client.once("ready", () => {
+client.once("ready", async () => {
     console.log("TheCommander is ready!");
+    await connectionToMongoDB(MONGO_URI);
+    await deployCommands();
 });
-
-deployCommands();
 
 client.on("interactionCreate", async interaction => {
     if (!interaction.isChatInputCommand()) return;

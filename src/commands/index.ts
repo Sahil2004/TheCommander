@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction } from "discord.js";
+import { ChatInputCommandInteraction } from "discord.js"; // eslint-disable-line no-unused-vars
 import {
     CONFIG
 } from "./../constants/commandNames";
