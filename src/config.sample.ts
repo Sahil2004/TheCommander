@@ -6,3 +6,4 @@
 export const BOT_TOKEN = "";
 export const CLIENT_ID = "";
 export const GUILD_ID = "";
+export const MONGO_URI = "";

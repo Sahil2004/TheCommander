@@ -23,6 +23,12 @@ const commands = [
                 .setDescription("Set name for muted role.")
                 .setRequired(true)
         )
+        .addStringOption(option =>
+            option
+                .setName("logs")
+                .setDescription("Set the name for logs channel.")
+                .setRequired(true)
+        )
 ].map(command => command.toJSON());
 
 export const deployCommands = () => {
