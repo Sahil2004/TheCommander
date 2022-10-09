@@ -28,7 +28,15 @@ const commands = [
                 .setName("logs")
                 .setDescription("Set the name for logs channel.")
                 .setRequired(true)
-        )
+        ),
+
+    new SlashCommandBuilder()
+        .setName("su")
+        .setDescription("Enter the root."),
+
+    new SlashCommandBuilder()
+        .setName("exit")
+        .setDescription("Exit from root.")
 ].map(command => command.toJSON());
 
 export const deployCommands = () => {

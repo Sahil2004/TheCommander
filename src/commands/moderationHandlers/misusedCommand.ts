@@ -1,7 +1,7 @@
 import { ChatInputCommandInteraction, EmbedBuilder, TextChannel } from "discord.js"; // eslint-disable-line no-unused-vars
 import { Roles } from "../../schemas/Roles";
 
-export const misusedCommand = async (interaction: ChatInputCommandInteraction) => {
+export const misusedCommand = async (interaction: ChatInputCommandInteraction): Promise<void> => {
     try {
         // Creating the embed
         const misusedCommandEmbed: EmbedBuilder = new EmbedBuilder()
