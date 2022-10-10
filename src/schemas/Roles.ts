@@ -10,7 +10,7 @@ const message = (props: any, name: string): string => {
     return `${props.value} is not an id passed into ${name}`;
 };
 
-const rolesSchema = new mongoose.Schema({
+const rolesSchema: any = new mongoose.Schema({
     ServerId: {
         type: String,
         require: true,

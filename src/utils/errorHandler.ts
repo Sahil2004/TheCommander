@@ -1,6 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChatInputCommandInteraction, EmbedBuilder } from "discord.js"; // eslint-disable-line no-unused-vars
+import { embedHandler } from "./embedHandler";
 
-export const errorHandler = async (message: string, interaction: ChatInputCommandInteraction, editReply: boolean): Promise<void> => {
+export const errorHandler = async (message: string, interaction: ChatInputCommandInteraction, editReply?: boolean, sendReply?: boolean): Promise<void> => {
     const issueReportingButton = new ActionRowBuilder<ButtonBuilder>()
         .addComponents(
             new ButtonBuilder()
@@ -8,14 +9,18 @@ export const errorHandler = async (message: string, interaction: ChatInputComman
                 .setURL("https://github.com/Sahil2004/TheCommander/issues/new")
                 .setStyle(ButtonStyle.Link)
         );
-    const errorEmbed = new EmbedBuilder()
-        .setColor("Red")
-        .setTitle("Error")
-        .setURL(`https://discordapp.com/channels/${interaction.guildId}/${interaction.channelId}/${interaction.id}`)
-        .setDescription(message);
-    if (editReply) {
+    const errorEmbed = await embedHandler("Error", "Red", message, interaction);
+    const replyType: boolean = editReply ?? true;
+    const sendType: boolean = sendReply ?? false;
+    const { channel } = interaction;
+    if (channel === null) return;
+    if (sendType) {
+        await channel.send({ embeds: [errorEmbed], components: [issueReportingButton] });
+        return;
+    }
+    if (replyType) {
         await interaction.editReply({ embeds: [errorEmbed], components: [issueReportingButton] });
-    } else if (!editReply) {
+    } else {
         await interaction.reply({ embeds: [errorEmbed], components: [issueReportingButton] });
     }
     return;

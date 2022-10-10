@@ -36,7 +36,43 @@ const commands = [
 
     new SlashCommandBuilder()
         .setName("exit")
-        .setDescription("Exit from root.")
+        .setDescription("Exit from root."),
+
+    new SlashCommandBuilder()
+        .setName("mute")
+        .setDescription("Mute a person.")
+        .addUserOption(option =>
+            option
+                .setName("user")
+                .setDescription("Ping the user you want to be muted.")
+                .setRequired(true)
+        )
+        .addStringOption(option =>
+            option
+                .setName("reason")
+                .setDescription("Enter the reason of muting.")
+        ),
+
+    new SlashCommandBuilder()
+        .setName("unmute")
+        .setDescription("Unmute a user.")
+        .addUserOption(option =>
+            option
+                .setName("user")
+                .setDescription("Ping the user you want to unmute.")
+                .setRequired(true)
+        ),
+
+    new SlashCommandBuilder()
+        .setName("purge")
+        .setDescription("Purge messages in the current channel less than 100.")
+        .addNumberOption(option =>
+            option
+                .setName("count")
+                .setDescription("Enter the number of messages to be deleted less than 100.")
+                .setRequired(true)
+        )
+
 ].map(command => command.toJSON());
 
 export const deployCommands = () => {
