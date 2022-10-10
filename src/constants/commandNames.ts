@@ -4,3 +4,6 @@ export const EXIT_ROOT = "exit";
 export const MUTE = "mute";
 export const UNMUTE = "unmute";
 export const PURGE = "purge";
+export const KICK = "kick";
+export const BAN = "ban";
+export const UNBAN = "unban";
