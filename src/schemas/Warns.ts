@@ -26,7 +26,7 @@ const warnsSchema = new mongoose.Schema({
             message: (props: any): string => message(props, "User")
         }
     },
-    reason: {
+    Reason: {
         type: String
     }
 });
@@ -34,7 +34,7 @@ const warnsSchema = new mongoose.Schema({
 export interface IWarnModel extends mongoose.Document {
     ServerId: string,
     User: string,
-    reason: string
+    Reason: string
 }
 
 export const Warns = mongoose.model<IWarnModel>("Warns", warnsSchema);

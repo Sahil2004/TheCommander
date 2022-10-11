@@ -7,3 +7,6 @@ export const PURGE = "purge";
 export const KICK = "kick";
 export const BAN = "ban";
 export const UNBAN = "unban";
+export const WARN = "warn";
+export const SHOW_WARNINGS = "warnings";
+export const REMOVE_WARNINGS = "pardon";

@@ -1,9 +1,23 @@
 import { REST, SlashCommandBuilder, Routes } from "discord.js";
 import { CLIENT_ID, GUILD_ID, BOT_TOKEN } from "./config";
+import { 
+    CONFIG,
+    ENTER_ROOT,
+    EXIT_ROOT,
+    MUTE,
+    UNMUTE,
+    PURGE,
+    KICK,
+    BAN,
+    UNBAN,
+    WARN,
+    SHOW_WARNINGS,
+    REMOVE_WARNINGS
+} from "./constants/commandNames";
 
 const commands = [
     new SlashCommandBuilder()
-        .setName("config")
+        .setName(CONFIG)
         .setDescription("Configure your server for moderation.")
         .addStringOption(option =>
             option
@@ -31,15 +45,15 @@ const commands = [
         ),
 
     new SlashCommandBuilder()
-        .setName("su")
+        .setName(ENTER_ROOT)
         .setDescription("Enter the root."),
 
     new SlashCommandBuilder()
-        .setName("exit")
+        .setName(EXIT_ROOT)
         .setDescription("Exit from root."),
 
     new SlashCommandBuilder()
-        .setName("mute")
+        .setName(MUTE)
         .setDescription("Mute a person.")
         .addUserOption(option =>
             option
@@ -54,7 +68,7 @@ const commands = [
         ),
 
     new SlashCommandBuilder()
-        .setName("unmute")
+        .setName(UNMUTE)
         .setDescription("Unmute a user.")
         .addUserOption(option =>
             option
@@ -64,7 +78,7 @@ const commands = [
         ),
 
     new SlashCommandBuilder()
-        .setName("purge")
+        .setName(PURGE)
         .setDescription("Purge messages in the current channel less than 100.")
         .addNumberOption(option =>
             option
@@ -74,7 +88,7 @@ const commands = [
         ),
 
     new SlashCommandBuilder()
-        .setName("kick")
+        .setName(KICK)
         .setDescription("Kick a user.")
         .addUserOption(option =>
             option
@@ -89,7 +103,7 @@ const commands = [
         ),
 
     new SlashCommandBuilder()
-        .setName("ban")
+        .setName(BAN)
         .setDescription("Ban a user.")
         .addUserOption(option =>
             option
@@ -99,12 +113,53 @@ const commands = [
         ),
 
     new SlashCommandBuilder()
-        .setName("unban")
+        .setName(UNBAN)
         .setDescription("Reverse your ban for a user.")
         .addUserOption(option =>
             option
                 .setName("user")
                 .setDescription("Select the name of the user you want to unban.")
+                .setRequired(true)
+        ),
+
+    new SlashCommandBuilder()
+        .setName(WARN)
+        .setDescription("Warn a user.")
+        .addUserOption(option =>
+            option
+                .setName("user")
+                .setDescription("Select the user you want to warn.")
+                .setRequired(true)
+        )
+        .addStringOption(option =>
+            option
+                .setName("reason")
+                .setDescription("Enter the reason for warning the user.")
+        ),
+
+    new SlashCommandBuilder()
+        .setName(SHOW_WARNINGS)
+        .setDescription("Check warnings that have been issued to a user.")
+        .addUserOption(option =>
+            option
+                .setName("user")
+                .setDescription("Enter the name of the user whose warnings you want to see.")
+                .setRequired(true)
+        ),
+
+    new SlashCommandBuilder()
+        .setName(REMOVE_WARNINGS)
+        .setDescription("Remove a warning that was issued from a user.")
+        .addUserOption(option =>
+            option
+                .setName("user")
+                .setDescription("Enter the user whose warning has to be removed.")
+                .setRequired(true)
+        )
+        .addNumberOption(option =>
+            option
+                .setName("index")
+                .setDescription("Enter the index of the warning that you want to remove.")
                 .setRequired(true)
         )
 ].map(command => command.toJSON());
