@@ -1,7 +1,6 @@
 import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js"; // eslint-disable-line no-unused-vars
 import { Warns } from "../../schemas/Warns";
 import { isSudoer, isSuperuser } from "../../utils/checkingPermissions";
-import { embedHandler } from "../../utils/embedHandler";
 import { errorHandler } from "../../utils/errorHandler";
 import { RootCheckEmbed } from "../../utils/RootCheck";
 import { successHandler } from "../../utils/successHandler";
@@ -29,7 +28,7 @@ export const showWarningsHandler = async (interaction: ChatInputCommandInteracti
             return;
         }
         let warningsData = "";
-        for (let [index, warning] of warnsDB.entries()) {
+        for (const [index, warning] of warnsDB.entries()) {
             warningsData += `\n${index + 1}. ${warning.Reason}`;
         }
         await successHandler(`Here are the warnings given to the user:${warningsData}`, interaction);
