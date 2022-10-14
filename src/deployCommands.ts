@@ -1,6 +1,6 @@
 import { REST, SlashCommandBuilder, Routes } from "discord.js";
 import { CLIENT_ID, GUILD_ID, BOT_TOKEN } from "./config";
-import { 
+import {
     CONFIG,
     ENTER_ROOT,
     EXIT_ROOT,
@@ -12,7 +12,8 @@ import {
     UNBAN,
     WARN,
     SHOW_WARNINGS,
-    REMOVE_WARNINGS
+    REMOVE_WARNINGS,
+    SLOWMODE
 } from "./constants/commandNames";
 
 const commands = [
@@ -161,6 +162,21 @@ const commands = [
                 .setName("index")
                 .setDescription("Enter the index of the warning that you want to remove.")
                 .setRequired(true)
+        ),
+
+    new SlashCommandBuilder()
+        .setName(SLOWMODE)
+        .setDescription("Set slowmode for a specific channel.")
+        .addNumberOption(option =>
+            option
+                .setName("time")
+                .setDescription("Time for which users will be restricted to send messages or creating new thread (IN SECONDS).")
+                .setRequired(true)
+        )
+        .addStringOption(option =>
+            option
+                .setName("reason")
+                .setDescription("Enter the reason for which you are enabling slowmode.")
         )
 ].map(command => command.toJSON());
 

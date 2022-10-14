@@ -9,6 +9,7 @@ import {
     PURGE,
     REMOVE_WARNINGS,
     SHOW_WARNINGS,
+    SLOWMODE,
     UNBAN,
     UNMUTE,
     WARN
@@ -25,6 +26,7 @@ import { unbanHandler } from "./moderationHandlers/unban";
 import { warnHandler } from "./moderationHandlers/warn";
 import { showWarningsHandler } from "./utilityHandlers/showWarnings";
 import { removeWarningsHandler } from "./moderationHandlers/removeWarnings";
+import { slowmodeHandler } from "./moderationHandlers/slowmode";
 
 export const HandleInteractions = (interaction: ChatInputCommandInteraction) => {
     const { commandName } = interaction;
@@ -64,6 +66,9 @@ export const HandleInteractions = (interaction: ChatInputCommandInteraction) => 
             break;
         case REMOVE_WARNINGS:
             removeWarningsHandler(interaction);
+            break;
+        case SLOWMODE:
+            slowmodeHandler(interaction);
             break;
         default:
             break;
