@@ -4,6 +4,7 @@ import {
     CONFIG,
     ENTER_ROOT,
     EXIT_ROOT,
+    HELP,
     KICK,
     MUTE,
     PURGE,
@@ -27,6 +28,7 @@ import { warnHandler } from "./moderationHandlers/warn";
 import { showWarningsHandler } from "./utilityHandlers/showWarnings";
 import { removeWarningsHandler } from "./moderationHandlers/removeWarnings";
 import { slowmodeHandler } from "./moderationHandlers/slowmode";
+import { helpHandler } from "./utilityHandlers/help";
 
 export const HandleInteractions = (interaction: ChatInputCommandInteraction) => {
     const { commandName } = interaction;
@@ -69,6 +71,9 @@ export const HandleInteractions = (interaction: ChatInputCommandInteraction) => 
             break;
         case SLOWMODE:
             slowmodeHandler(interaction);
+            break;
+        case HELP:
+            helpHandler(interaction);
             break;
         default:
             break;

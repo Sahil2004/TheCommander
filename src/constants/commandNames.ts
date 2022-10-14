@@ -11,3 +11,4 @@ export const WARN = "warn";
 export const SHOW_WARNINGS = "warnings";
 export const REMOVE_WARNINGS = "pardon";
 export const SLOWMODE = "slowmode";
+export const HELP = "man";
