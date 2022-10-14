@@ -13,7 +13,8 @@ import {
     WARN,
     SHOW_WARNINGS,
     REMOVE_WARNINGS,
-    SLOWMODE
+    SLOWMODE,
+    HELP
 } from "./constants/commandNames";
 
 const commands = [
@@ -177,6 +178,31 @@ const commands = [
             option
                 .setName("reason")
                 .setDescription("Enter the reason for which you are enabling slowmode.")
+        ),
+
+    new SlashCommandBuilder()
+        .setName(HELP)
+        .setDescription("Get help for TheCommander bot.")
+        .addStringOption(option =>
+            option
+                .setName("command")
+                .setDescription("Select the command for which you want to know more.")
+                .addChoices(
+                    { name: CONFIG, value: CONFIG },
+                    { name: ENTER_ROOT, value: ENTER_ROOT },
+                    { name: EXIT_ROOT, value: EXIT_ROOT },
+                    { name: MUTE, value: MUTE },
+                    { name: UNMUTE, value: UNMUTE },
+                    { name: PURGE, value: PURGE },
+                    { name: KICK, value: KICK },
+                    { name: BAN, value: BAN },
+                    { name: UNBAN, value: UNBAN },
+                    { name: WARN, value: WARN },
+                    { name: SHOW_WARNINGS, value: SHOW_WARNINGS },
+                    { name: REMOVE_WARNINGS, value: REMOVE_WARNINGS },
+                    { name: SLOWMODE, value: SLOWMODE },
+                    { name: HELP, value: HELP }
+                )
         )
 ].map(command => command.toJSON());
 

@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction } from "discord.js";
+import { ChatInputCommandInteraction } from "discord.js"; // eslint-disable-line no-unused-vars
 import { REMOVE_WARNINGS } from "../../constants/commandNames";
 import { Warns } from "../../schemas/Warns";
 import { isSudoer, isSuperuser } from "../../utils/checkingPermissions";
