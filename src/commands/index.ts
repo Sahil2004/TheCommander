@@ -7,8 +7,11 @@ import {
     KICK,
     MUTE,
     PURGE,
+    REMOVE_WARNINGS,
+    SHOW_WARNINGS,
     UNBAN,
-    UNMUTE
+    UNMUTE,
+    WARN
 } from "./../constants/commandNames";
 import { configHandler } from "./utilityHandlers/config";
 import { enterRoot } from "./moderationHandlers/su";
@@ -19,6 +22,9 @@ import { purge } from "./utilityHandlers/purge";
 import { kickHandler } from "./moderationHandlers/kick";
 import { banHandler } from "./moderationHandlers/ban";
 import { unbanHandler } from "./moderationHandlers/unban";
+import { warnHandler } from "./moderationHandlers/warn";
+import { showWarningsHandler } from "./utilityHandlers/showWarnings";
+import { removeWarningsHandler } from "./moderationHandlers/removeWarnings";
 
 export const HandleInteractions = (interaction: ChatInputCommandInteraction) => {
     const { commandName } = interaction;
@@ -49,6 +55,15 @@ export const HandleInteractions = (interaction: ChatInputCommandInteraction) => 
             break;
         case UNBAN:
             unbanHandler(interaction);
+            break;
+        case WARN:
+            warnHandler(interaction);
+            break;
+        case SHOW_WARNINGS:
+            showWarningsHandler(interaction);
+            break;
+        case REMOVE_WARNINGS:
+            removeWarningsHandler(interaction);
             break;
         default:
             break;
