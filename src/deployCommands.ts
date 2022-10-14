@@ -71,8 +71,42 @@ const commands = [
                 .setName("count")
                 .setDescription("Enter the number of messages to be deleted less than 100.")
                 .setRequired(true)
-        )
+        ),
 
+    new SlashCommandBuilder()
+        .setName("kick")
+        .setDescription("Kick a user.")
+        .addUserOption(option =>
+            option
+                .setName("user")
+                .setDescription("Select the user you want to kick.")
+                .setRequired(true)
+        )
+        .addStringOption(option =>
+            option
+                .setName("reason")
+                .setDescription("Enter the reason for kicking the user.")
+        ),
+
+    new SlashCommandBuilder()
+        .setName("ban")
+        .setDescription("Ban a user.")
+        .addUserOption(option =>
+            option
+                .setName("user")
+                .setDescription("Select the user you want to ban.")
+                .setRequired(true)
+        ),
+
+    new SlashCommandBuilder()
+        .setName("unban")
+        .setDescription("Reverse your ban for a user.")
+        .addUserOption(option =>
+            option
+                .setName("user")
+                .setDescription("Select the name of the user you want to unban.")
+                .setRequired(true)
+        )
 ].map(command => command.toJSON());
 
 export const deployCommands = () => {

@@ -1,10 +1,13 @@
 import { ChatInputCommandInteraction } from "discord.js"; // eslint-disable-line no-unused-vars
 import {
+    BAN,
     CONFIG,
     ENTER_ROOT,
     EXIT_ROOT,
+    KICK,
     MUTE,
     PURGE,
+    UNBAN,
     UNMUTE
 } from "./../constants/commandNames";
 import { configHandler } from "./utilityHandlers/config";
@@ -13,6 +16,9 @@ import { exitRoot } from "./moderationHandlers/exit";
 import { mute } from "./moderationHandlers/mute";
 import { unmute } from "./moderationHandlers/unmute";
 import { purge } from "./utilityHandlers/purge";
+import { kickHandler } from "./moderationHandlers/kick";
+import { banHandler } from "./moderationHandlers/ban";
+import { unbanHandler } from "./moderationHandlers/unban";
 
 export const HandleInteractions = (interaction: ChatInputCommandInteraction) => {
     const { commandName } = interaction;
@@ -34,6 +40,15 @@ export const HandleInteractions = (interaction: ChatInputCommandInteraction) => 
             break;
         case PURGE:
             purge(interaction);
+            break;
+        case KICK:
+            kickHandler(interaction);
+            break;
+        case BAN:
+            banHandler(interaction);
+            break;
+        case UNBAN:
+            unbanHandler(interaction);
             break;
         default:
             break;
