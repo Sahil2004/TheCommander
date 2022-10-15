@@ -231,7 +231,7 @@ export const helpHandler = async (interaction: ChatInputCommandInteraction): Pro
         const helpEmbed: EmbedBuilder = await embedHandler(
             "HELP",
             "Green",
-            "TheCommander is a discord moderation bot with a lot of features and very little configuration. It was made to ease the moderation of a server with linux like commands. Also it reflects my love for linux.\nBasically, everyone will have a normal looking role so that people behave normally without the fear of someone moderating them. When moderation is needed, a mod can do his stuff whenever needed by elevating his permissions by entering root.\n\nTo get help with a specific command, use `/" + HELP + " <command>`\n\nExample: `/" + HELP + " " + KICK + "`\n\n**Commands:**\n" + commandString, interaction
+            "TheCommander is a discord moderation bot with a lot of features and very little configuration. It was made to ease the moderation of a server with linux like commands. Also it reflects my love for linux.\nBasically, everyone will have a normal looking role so that people behave normally without the fear of someone moderating them. When moderation is needed, a mod can do his stuff wherever needed by elevating his permissions by entering root.\n\nTo get help with a specific command, use `/" + HELP + " <command>`\n\nExample: `/" + HELP + " " + KICK + "`\n\n**Commands:**\n" + commandString, interaction
         );
         await interaction.editReply({ embeds: [helpEmbed] });
         return;
