@@ -1,4 +1,4 @@
-import { ChatInputCommandInteraction, EmbedBuilder } from "discord.js"; // eslint-disable-line no-unused-vars
+import { ChatInputCommandInteraction } from "discord.js"; // eslint-disable-line no-unused-vars
 import { Warns } from "../../schemas/Warns";
 import { isSudoer, isSuperuser } from "../../utils/checkingPermissions";
 import { errorHandler } from "../../utils/errorHandler";
@@ -6,10 +6,11 @@ import { RootCheckEmbed } from "../../utils/RootCheck";
 import { successHandler } from "../../utils/successHandler";
 import { misusedCommand } from "../moderationHandlers/misusedCommand";
 
-export const showWarningsHandler = async (interaction: ChatInputCommandInteraction): Promise<void> => {
+export const showWarningsHandler = async (interaction: ChatInputCommandInteraction, perms?: boolean): Promise<void> => {
     await interaction.deferReply();
     const { guild } = interaction;
     const user = interaction.options.getUser("user");
+    const hasPerm = perms ?? false;
     if (guild === null) {
         await errorHandler("Error: Guild is null in showWarnings.ts.", interaction);
         return;
@@ -18,7 +19,7 @@ export const showWarningsHandler = async (interaction: ChatInputCommandInteracti
         await errorHandler("Error: User mentioned in the command is null in showWarnings.ts.", interaction);
         return;
     }
-    if (await isSuperuser(interaction)) {
+    if (await isSuperuser(interaction) === true || hasPerm === true) {
         const warnsDB = await Warns.find({
             ServerId: guild.id,
             User: user.id

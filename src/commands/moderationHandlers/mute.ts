@@ -6,9 +6,10 @@ import { RootCheckEmbed } from "../../utils/RootCheck";
 import { successHandler } from "../../utils/successHandler";
 import { misusedCommand } from "./misusedCommand";
 
-export const mute = async (interaction: ChatInputCommandInteraction): Promise<void> => {
+export const mute = async (interaction: ChatInputCommandInteraction, perms?: boolean): Promise<void> => {
     await interaction.deferReply();
     const { guild } = interaction;
+    const hasPerm = perms ?? false;
     const member: GuildMember = interaction.options.getMember("user") as GuildMember;
     const reason: string = interaction.options.getString("reason") ?? "Not Specified";
     if (member === null) {
@@ -19,7 +20,7 @@ export const mute = async (interaction: ChatInputCommandInteraction): Promise<vo
         await errorHandler("Error: interaction.guild === null in mute.ts", interaction);
         return;
     }
-    if (await isSuperuser(interaction)) {
+    if (await isSuperuser(interaction) === true || hasPerm === true) {
         const Server = await Roles.findOne({
             ServerId: guild.id
         });

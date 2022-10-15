@@ -7,11 +7,12 @@ import { RootCheckEmbed } from "../../utils/RootCheck";
 import { successHandler } from "../../utils/successHandler";
 import { misusedCommand } from "./misusedCommand";
 
-export const removeWarningsHandler = async (interaction: ChatInputCommandInteraction): Promise<void> => {
+export const removeWarningsHandler = async (interaction: ChatInputCommandInteraction, perms?: boolean): Promise<void> => {
     await interaction.deferReply();
     const { guild } = interaction;
     const user = interaction.options.getUser("user");
     const index = interaction.options.getNumber("index");
+    const hasPerm = perms ?? false;
     if (guild === null) {
         await errorHandler("Error: Guild is null in removeWarnings.ts.", interaction);
         return;
@@ -24,7 +25,7 @@ export const removeWarningsHandler = async (interaction: ChatInputCommandInterac
         await errorHandler("Error: index entered is null in removeWarnings.ts.", interaction);
         return;
     }
-    if (await isSuperuser(interaction)) {
+    if (await isSuperuser(interaction) === true || hasPerm === true) {
         const warnsDB = await Warns.find({
             ServerId: guild.id,
             User: user.id

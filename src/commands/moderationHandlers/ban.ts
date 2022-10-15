@@ -4,10 +4,11 @@ import { RootCheckEmbed } from "../../utils/RootCheck";
 import { successHandler } from "../../utils/successHandler";
 import { misusedCommand } from "./misusedCommand";
 
-export const banHandler = async (interaction: ChatInputCommandInteraction): Promise<void> => {
+export const banHandler = async (interaction: ChatInputCommandInteraction, perms?: boolean): Promise<void> => {
     await interaction.deferReply();
     const member = interaction.options.getMember("user") as GuildMember;
-    if (await isSuperuser(interaction)) {
+    const hasPerm = perms ?? false;
+    if (await isSuperuser(interaction) === true || hasPerm === true) {
         await member.ban();
         await successHandler(`${member} is banned.`, interaction);
         return;

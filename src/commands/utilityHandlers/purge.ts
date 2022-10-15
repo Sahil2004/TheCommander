@@ -5,9 +5,10 @@ import { RootCheckEmbed } from "../../utils/RootCheck";
 import { successHandler } from "../../utils/successHandler";
 import { misusedCommand } from "../moderationHandlers/misusedCommand";
 
-export const purge = async (interaction: ChatInputCommandInteraction): Promise<void> => {
+export const purge = async (interaction: ChatInputCommandInteraction, perms?: boolean): Promise<void> => {
     await interaction.deferReply();
     const { channel, guild } = interaction;
+    const hasPerm = perms ?? false;
     if (channel === null) {
         await errorHandler("interaction.channel === null in purge.ts.", interaction);
         return;
@@ -25,7 +26,7 @@ export const purge = async (interaction: ChatInputCommandInteraction): Promise<v
         await errorHandler("Enter a valid number of messages to delete between 0 to 100 (0 excluded but 100 included)", interaction);
         return;
     }
-    if (await isSuperuser(interaction)) {
+    if (await isSuperuser(interaction) === true || hasPerm === true) {
         try {
             await channel.bulkDelete(count, true);
             await successHandler(`Deleted ${count} messages in this channel. But those messages will be visible in the logs channel.`, interaction, true, true);

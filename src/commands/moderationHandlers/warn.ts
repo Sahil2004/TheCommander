@@ -6,11 +6,12 @@ import { RootCheckEmbed } from "../../utils/RootCheck";
 import { successHandler } from "../../utils/successHandler";
 import { misusedCommand } from "./misusedCommand";
 
-export const warnHandler = async (interaction: ChatInputCommandInteraction): Promise<void> => {
+export const warnHandler = async (interaction: ChatInputCommandInteraction, perms?: boolean): Promise<void> => {
     await interaction.deferReply();
     const { guild } = interaction;
     const user = interaction.options.getUser("user");
     const reason = interaction.options.getString("reason") ?? "Not Specified";
+    const hasPerm = perms ?? false;
     if (guild === null) {
         await errorHandler("Error: Guild is null in warn.ts.", interaction);
         return;
@@ -19,7 +20,7 @@ export const warnHandler = async (interaction: ChatInputCommandInteraction): Pro
         await errorHandler("Error: The entered user is null in warn.ts.", interaction);
         return;
     }
-    if (await isSuperuser(interaction)) {
+    if (await isSuperuser(interaction) === true || hasPerm === true) {
         await Warns.create({
             ServerId: guild.id,
             User: user.id,

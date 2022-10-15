@@ -5,10 +5,11 @@ import { RootCheckEmbed } from "../../utils/RootCheck";
 import { successHandler } from "../../utils/successHandler";
 import { misusedCommand } from "./misusedCommand";
 
-export const unbanHandler = async (interaction: ChatInputCommandInteraction): Promise<void> => {
+export const unbanHandler = async (interaction: ChatInputCommandInteraction, perms?: boolean): Promise<void> => {
     await interaction.deferReply();
     const user: User | null = interaction.options.getUser("user");
     const { guild } = interaction;
+    const hasPerm = perms ?? false;
     if (guild === null) {
         await errorHandler("Error: Guild is null in unban.ts.", interaction);
         return;
@@ -17,7 +18,7 @@ export const unbanHandler = async (interaction: ChatInputCommandInteraction): Pr
         await errorHandler("Error: User you gave as the option is null in unban.ts.", interaction);
         return;
     }
-    if (await isSuperuser(interaction)) {
+    if (await isSuperuser(interaction) === true || hasPerm === true) {
         await guild.members.unban(user);
         await successHandler(`${user} has been unbanned.`, interaction);
         return;
