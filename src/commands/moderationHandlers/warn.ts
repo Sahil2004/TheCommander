@@ -21,6 +21,11 @@ export const warnHandler = async (interaction: ChatInputCommandInteraction, perm
         return;
     }
     if (await isSuperuser(interaction) === true || hasPerm === true) {
+        const reasonRegEx: RegExp = /[a-zA-Z0-9.-_&]/g;
+        if (reasonRegEx.test(reason) === false) {
+            await errorHandler("Only characters a-z, A-Z, 0-9, ., -, _, & are allowed.", interaction);
+            return;
+        }
         await Warns.create({
             ServerId: guild.id,
             User: user.id,
@@ -32,6 +37,5 @@ export const warnHandler = async (interaction: ChatInputCommandInteraction, perm
     } else {
         await misusedCommand(interaction);
     }
-    await successHandler(`${user} is warned.\nReason: ${reason}`, interaction);
     return;
 };
