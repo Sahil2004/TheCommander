@@ -11,6 +11,7 @@ import {
     REMOVE_WARNINGS,
     SHOW_WARNINGS,
     SLOWMODE,
+    SUDO,
     UNBAN,
     UNMUTE,
     WARN
@@ -29,6 +30,7 @@ import { showWarningsHandler } from "./utilityHandlers/showWarnings";
 import { removeWarningsHandler } from "./moderationHandlers/removeWarnings";
 import { slowmodeHandler } from "./moderationHandlers/slowmode";
 import { helpHandler } from "./utilityHandlers/help";
+import { sudoHandler } from "./moderationHandlers/sudo";
 
 export const HandleInteractions = (interaction: ChatInputCommandInteraction) => {
     const { commandName } = interaction;
@@ -74,6 +76,9 @@ export const HandleInteractions = (interaction: ChatInputCommandInteraction) => 
             break;
         case HELP:
             helpHandler(interaction);
+            break;
+        case SUDO:
+            sudoHandler(interaction);
             break;
         default:
             break;

@@ -14,7 +14,8 @@ import {
     SHOW_WARNINGS,
     REMOVE_WARNINGS,
     SLOWMODE,
-    HELP
+    HELP,
+    SUDO
 } from "./constants/commandNames";
 
 const commands = [
@@ -191,6 +192,7 @@ const commands = [
                     { name: CONFIG, value: CONFIG },
                     { name: ENTER_ROOT, value: ENTER_ROOT },
                     { name: EXIT_ROOT, value: EXIT_ROOT },
+                    { name: SUDO, value: SUDO },
                     { name: MUTE, value: MUTE },
                     { name: UNMUTE, value: UNMUTE },
                     { name: PURGE, value: PURGE },
@@ -202,6 +204,146 @@ const commands = [
                     { name: REMOVE_WARNINGS, value: REMOVE_WARNINGS },
                     { name: SLOWMODE, value: SLOWMODE },
                     { name: HELP, value: HELP }
+                )
+        ),
+
+    new SlashCommandBuilder()
+        .setName(SUDO)
+        .setDescription("Execute a command with elevated privledges without going into root.")
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName(MUTE)
+                .setDescription("Mute a user.")
+                .addUserOption(option =>
+                    option
+                        .setName("user")
+                        .setDescription("Enter the name of the user to be muted.")
+                        .setRequired(true)
+                )
+                .addStringOption(option =>
+                    option
+                        .setName("reason")
+                        .setDescription("Enter the reason for muting.")
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName(UNMUTE)
+                .setDescription("Unmute a user")
+                .addUserOption(option =>
+                    option
+                        .setName("user")
+                        .setDescription("Enter the user that has to be unmuted.")
+                        .setRequired(true)
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName(PURGE)
+                .setDescription("Delete the specified number of messages (less than 100).")
+                .addNumberOption(option =>
+                    option
+                        .setName("count")
+                        .setDescription("Enter the number of messages to be deleted (less than 100).")
+                        .setRequired(true)
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName(KICK)
+                .setDescription("Kick a user.")
+                .addUserOption(option =>
+                    option
+                        .setName("user")
+                        .setDescription("Enter the user to be kicked.")
+                        .setRequired(true)
+                )
+                .addStringOption(option =>
+                    option
+                        .setName("reason")
+                        .setDescription("Reason for kicking.")
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName(BAN)
+                .setDescription("Ban a user")
+                .addUserOption(option =>
+                    option
+                        .setName("user")
+                        .setDescription("Enter the user to be banned.")
+                        .setRequired(true)
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName(UNBAN)
+                .setDescription("Unban a user.")
+                .addUserOption(option =>
+                    option
+                        .setName("user")
+                        .setDescription("Enter the user to be unbanned.")
+                        .setRequired(true)
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName(WARN)
+                .setDescription("Warn a user.")
+                .addUserOption(option =>
+                    option
+                        .setName("user")
+                        .setDescription("Enter the user to be warned.")
+                        .setRequired(true)
+                )
+                .addStringOption(option =>
+                    option
+                        .setName("reason")
+                        .setDescription("Enter the reason for warning.")
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName(SHOW_WARNINGS)
+                .setDescription("Get all the warnings of a specified user.")
+                .addUserOption(option =>
+                    option
+                        .setName("user")
+                        .setDescription("Enter the user whose warnings you want to see.")
+                        .setRequired(true)
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName(REMOVE_WARNINGS)
+                .setDescription("Remove a warning of a user.")
+                .addUserOption(option =>
+                    option
+                        .setName("user")
+                        .setDescription("Enter the user whose warning has to be removed.")
+                        .setRequired(true)
+                )
+                .addNumberOption(option =>
+                    option
+                        .setName("index")
+                        .setDescription("Enter the index of the warning you want to remove.")
+                        .setRequired(true)
+                )
+        )
+        .addSubcommand(subcommand =>
+            subcommand
+                .setName(SLOWMODE)
+                .setDescription("Set slowmode for a channel.")
+                .addNumberOption(option =>
+                    option
+                        .setName("time")
+                        .setDescription("Time for which users will be restricted to send messages or create new threads (IN SECONDS).")
+                        .setRequired(true)
+                )
+                .addStringOption(option =>
+                    option
+                        .setName("reason")
+                        .setDescription("Enter the reaosn for enabling slowmode.")
                 )
         )
 ].map(command => command.toJSON());

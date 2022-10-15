@@ -14,7 +14,8 @@ import {
     SHOW_WARNINGS,
     REMOVE_WARNINGS,
     SLOWMODE,
-    HELP
+    HELP,
+    SUDO
 } from "../../constants/commandNames";
 import { errorHandler } from "../../utils/errorHandler";
 
@@ -69,6 +70,22 @@ export const helpHandler = async (interaction: ChatInputCommandInteraction): Pro
             name: EXIT_ROOT,
             desc: "Removes superuser role from sudoers.",
             flags: []
+        },
+        {
+            name: SUDO,
+            desc: "Run a command with elevated privledges without going into root.",
+            flags: [
+                {
+                    name: "command name",
+                    desc: "The command you want to run.",
+                    required: true
+                },
+                {
+                    name: "args",
+                    desc: "The arguments that need to be given the specific command.",
+                    required: false
+                }
+            ]
         },
         {
             name: MUTE,
