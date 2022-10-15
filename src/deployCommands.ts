@@ -22,6 +22,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(CONFIG)
         .setDescription("Configure your server for moderation.")
+        .setDMPermission(false)
         .addStringOption(option =>
             option
                 .setName("superuser")
@@ -49,15 +50,18 @@ const commands = [
 
     new SlashCommandBuilder()
         .setName(ENTER_ROOT)
-        .setDescription("Enter the root."),
+        .setDescription("Enter the root.")
+        .setDMPermission(false),
 
     new SlashCommandBuilder()
         .setName(EXIT_ROOT)
-        .setDescription("Exit from root."),
+        .setDescription("Exit from root.")
+        .setDMPermission(false),
 
     new SlashCommandBuilder()
         .setName(MUTE)
         .setDescription("Mute a person.")
+        .setDMPermission(false)
         .addUserOption(option =>
             option
                 .setName("user")
@@ -73,6 +77,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(UNMUTE)
         .setDescription("Unmute a user.")
+        .setDMPermission(false)
         .addUserOption(option =>
             option
                 .setName("user")
@@ -83,6 +88,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(PURGE)
         .setDescription("Purge messages in the current channel less than 100.")
+        .setDMPermission(false)
         .addNumberOption(option =>
             option
                 .setName("count")
@@ -93,6 +99,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(KICK)
         .setDescription("Kick a user.")
+        .setDMPermission(false)
         .addUserOption(option =>
             option
                 .setName("user")
@@ -108,6 +115,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(BAN)
         .setDescription("Ban a user.")
+        .setDMPermission(false)
         .addUserOption(option =>
             option
                 .setName("user")
@@ -118,6 +126,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(UNBAN)
         .setDescription("Reverse your ban for a user.")
+        .setDMPermission(false)
         .addUserOption(option =>
             option
                 .setName("user")
@@ -128,6 +137,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(WARN)
         .setDescription("Warn a user.")
+        .setDMPermission(false)
         .addUserOption(option =>
             option
                 .setName("user")
@@ -143,6 +153,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(SHOW_WARNINGS)
         .setDescription("Check warnings that have been issued to a user.")
+        .setDMPermission(false)
         .addUserOption(option =>
             option
                 .setName("user")
@@ -153,6 +164,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(REMOVE_WARNINGS)
         .setDescription("Remove a warning that was issued from a user.")
+        .setDMPermission(false)
         .addUserOption(option =>
             option
                 .setName("user")
@@ -169,6 +181,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(SLOWMODE)
         .setDescription("Set slowmode for a specific channel.")
+        .setDMPermission(false)
         .addNumberOption(option =>
             option
                 .setName("time")
@@ -184,6 +197,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(HELP)
         .setDescription("Get help for TheCommander bot.")
+        .setDMPermission(false)
         .addStringOption(option =>
             option
                 .setName("command")
@@ -210,6 +224,7 @@ const commands = [
     new SlashCommandBuilder()
         .setName(SUDO)
         .setDescription("Execute a command with elevated privledges without going into root.")
+        .setDMPermission(false)
         .addSubcommand(subcommand =>
             subcommand
                 .setName(MUTE)
